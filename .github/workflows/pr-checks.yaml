@@ -19,7 +19,7 @@ jobs:
         uses: lewagon/wait-on-check-action@v0.2
         with:
           ref: main
-          check-name: push-images
+          check-name: "Push Images"
           wait-interval: 30
       
       - name: Acceptance Tests
