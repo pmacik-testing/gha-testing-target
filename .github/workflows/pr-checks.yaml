@@ -18,7 +18,7 @@ jobs:
         uses: lewagon/wait-on-check-action@v0.2
         with:
           ref: ${{ env.GITHUB_REF }}
-          check-name: push-images
+          check-name: push-images (${{ env.GITHUB_REF }})
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           wait-interval: 60
       
