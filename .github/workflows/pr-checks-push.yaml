@@ -1,4 +1,4 @@
-name: "PR checks - Push Images"
+name: "PR checks - Push"
 
 on:
   pull_request_target:
@@ -21,7 +21,7 @@ jobs:
       - name: Extract artifacts
         uses: dawidd6/action-download-artifact@v2
         with:
-          workflow: "PR checks"
+          workflow: "PR checks - Build"
           workflow_conclusion: success
           name: operator-images
 

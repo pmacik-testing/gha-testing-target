@@ -1,0 +1,23 @@
+name: "PR checks - Build"
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-images:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Build
+        run: |
+          echo "Building..."
+          env >> output.txt
+          echo "Done"
+
+      - name: Archive images
+        uses: actions/upload-artifact@v2
+        with:
+          name: operator-images
+          path: output.txt
