@@ -10,6 +10,21 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
+      - name: Wait for build
+        uses: lewagon/wait-on-check-action@v0.2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          check-name: build-images
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 5
+      
+      - name: Extract artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: "PR checks"
+          workflow_conclusion: success
+          name: operator-images
+
       - name: Push
         run: |
           echo "Pushing"

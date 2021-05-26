@@ -13,9 +13,18 @@ jobs:
       - name: Build
         run: |
           echo "Building..."
-          env
+          env >> output.txt
           echo "Done"
-      
+
+      - name: Archive images
+        uses: actions/upload-artifact@v2
+        with:
+          name: operator-images
+          path: output.txt
+
+  acceptance-tests:
+    runs-on: ubuntu-20.04
+    steps:
       - name: Wait for push
         uses: lewagon/wait-on-check-action@v0.2
         with:
