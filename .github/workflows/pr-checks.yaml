@@ -12,7 +12,9 @@ jobs:
     steps:
       - name: Build
         run: |
-          echo "Building"
+          echo "Building..."
+          env
+          echo "Done"
       
       - name: Wait for push
         uses: lewagon/wait-on-check-action@v0.2
