@@ -5,12 +5,30 @@ on:
     branches:
       - main
 
+env:
+  SDK_VERSION: "1.3.0"
+  OPM_VERSION: "1.15.2"
+  MINIKUBE_WANTUPDATENOTIFICATION: false
+  MINIKUBE_WANTREPORTERRORPROMPT: false
+  K8S_VERSION: "1.19.2"
+  MINIKUBE_VERSION: "1.15.1"
+
 jobs:
   acceptance-tests:
     runs-on: ubuntu-20.04
     steps:
+
+      - name: Checkout Git Repository
+        uses: actions/checkout@v2
+
+      - name: Setup CLI
+        uses: ./.github/actions/setup-cli
+        with:
+          kubectl: true
+          minikube: true
+
       - name: Wait for push
-        uses: lewagon/wait-on-check-action@v0.2
+        uses: lewagon/wait-on-check-action@1b1630e169116b58a4b933d5ad7effc46d3d312d
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           check-name: push-images

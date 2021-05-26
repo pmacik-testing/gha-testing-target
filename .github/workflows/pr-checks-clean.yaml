@@ -1,0 +1,15 @@
+name: "PR checks - Clean images"
+
+on:
+  pull_request_target:
+    branches:
+      - main
+    types: [closed]
+
+jobs:
+  build-images:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout Git Repo/sitory
+        uses: actions/checkout@v2

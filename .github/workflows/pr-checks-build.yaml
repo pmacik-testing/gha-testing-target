@@ -5,11 +5,25 @@ on:
     branches:
       - main
 
+env:
+  SDK_VERSION: "1.3.0"
+  OPM_VERSION: "1.15.2"
+  MINIKUBE_WANTUPDATENOTIFICATION: false
+  MINIKUBE_WANTREPORTERRORPROMPT: false
+  K8S_VERSION: "1.19.2"
+  MINIKUBE_VERSION: "1.15.1"
+
 jobs:
   build-images:
     runs-on: ubuntu-20.04
 
     steps:
+      - name: Setup CLI
+        uses: ./.github/actions/setup-cli
+        with:
+          operator-sdk: true
+          kubectl: true
+
       - name: Build
         run: |
           echo "Building..."
@@ -19,5 +33,5 @@ jobs:
       - name: Archive images
         uses: actions/upload-artifact@v2
         with:
-          name: operator-images
+          name: output-${{github.event.pull_request.number}}-${{github.event.pull_request.head.sha}}
           path: output.txt

@@ -5,11 +5,28 @@ on:
     branches:
       - main
 
+env:
+  SDK_VERSION: "1.3.0"
+  OPM_VERSION: "1.15.2"
+  MINIKUBE_WANTUPDATENOTIFICATION: false
+  MINIKUBE_WANTREPORTERRORPROMPT: false
+  K8S_VERSION: "1.19.2"
+  MINIKUBE_VERSION: "1.15.1"
+
 jobs:
   push-images:
     runs-on: ubuntu-20.04
 
     steps:
+      - name: Checkout Git Repository
+        uses: actions/checkout@v2
+
+      - name: Setup CLI
+        uses: ./.github/actions/setup-cli
+        with:
+          opm: true
+          kubectl: true
+
       - name: Wait for build
         uses: lewagon/wait-on-check-action@v0.2
         with:
@@ -19,12 +36,12 @@ jobs:
           wait-interval: 5
       
       - name: Extract artifacts
-        uses: dawidd6/action-download-artifact@v2
+        uses: marcofaggian/action-download-multiple-artifacts@v3.0.8
         with:
-          workflow: "PR checks - Build"
+          names: output-${{github.event.pull_request.number}}-${{github.event.pull_request.head.sha}}
 
       - name: Push
         run: |
           echo "Pushing"
-          sleep 15s
+          cat output.txt
           echo "done"
