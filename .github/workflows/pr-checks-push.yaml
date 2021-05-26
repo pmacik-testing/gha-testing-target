@@ -23,7 +23,6 @@ jobs:
         with:
           commit: ${{ github.event.pull_request.head.sha }}
           workflow: "PR checks - Build"
-          workflow_conclusion: success
 
       - name: Push
         run: |
