@@ -1,4 +1,4 @@
-name: PR checks
+name: "PR checks"
 
 on:
   pull_request:
@@ -7,7 +7,6 @@ on:
 
 jobs:
   build-images:
-    name: Build Images
     runs-on: ubuntu-20.04
 
     steps:
@@ -19,9 +18,9 @@ jobs:
         uses: lewagon/wait-on-check-action@v0.2
         with:
           ref: main
-          check-name: "Push Images"
+          check-name: push-images
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          wait-interval: 30
+          wait-interval: 60
       
       - name: Acceptance Tests
         run: |

@@ -1,4 +1,4 @@
-name: PR checks - Push Images
+name: "PR checks - Push Images"
 
 on:
   pull_request_target:
