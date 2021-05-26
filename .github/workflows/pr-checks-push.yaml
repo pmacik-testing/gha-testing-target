@@ -21,7 +21,6 @@ jobs:
       - name: Extract artifacts
         uses: dawidd6/action-download-artifact@v2
         with:
-          commit: ${{ github.event.pull_request.head.sha }}
           workflow: "PR checks - Build"
 
       - name: Push
