@@ -1,0 +1,18 @@
+name: PR checks
+
+on:
+  pull_request_target:
+    branches:
+      - main
+
+jobs:
+  push-images:
+    name: Push Images
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Push
+        run: |
+          echo "Pushing"
+          sleep 15s
+          echo "done"
